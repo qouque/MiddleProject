@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="sosboard">
+
+<select id="selectAllBoard" resultClass="Report_BoardVO">
+
+	select * from report_board
+
+</select>
+
+<select id="selectTitleBoard" resultClass="Report_BoardVO" parameterClass="String">
+	
+	select * from report_board where report__title like '%' || #report_title# || '%'
+	
+</select>
+
+<insert id="insertBoard" parameterClass="Report_BoardVO">
+
+	insert into report_board (report_id, report_com_id, report_bad_id, report_date,report_content, report_checked, report_title)
+	values (report_board_seq.nextval, #report_com_id#, #report_bad_id#, #report_date#, #report_content#, #report_checked#, #report_title#)
+
+
+
+</insert>
+
+<select id="selectOderByBoard" resultClass="Report_BoardVO" parameterClass="int">
+
+select * from  report_board where report_id = #data# order by report_date desc
+
+</select>
+
+<select id="selectBoardId" parameterClass="int" resultClass="Report_BoardVO">
+
+	select * from report_board where report_id = #report_id#
+
+</select>
+
+<select id="selectWriter" resultClass="Report_BoardVO" parameterClass="String">
+
+	select * from report_board where report_com_id like '%' || #report_com_id# || '%' order by report_date desc
+
+</select>
+
+<update id="updateBoard" parameterClass="Report_BoardVO">
+	update report_board
+	set  report_title = #report_title# 
+		, report_content = #report_content#
+		, report_bad_id = #report_bad_id#
+	where report_id = #report_id# 
+
+</update>
+
+<delete id="deleteBoard" parameterClass="int">
+	delete from report_board where report_id = #report_id#
+</delete>
+
+</sqlMap>			

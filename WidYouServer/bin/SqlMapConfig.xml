@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+<!-- 내가 한 것 -->
+	<properties resource="SqlMapConfig.properties" />
+	
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
+		maxTransactions="5" useStatementNamespaces="true" />
+	
+	<!-- 
+	VO클래스등의 이름이 패키지명까지 기술하면 길어지는데 이것을 간단히
+	표시하기 위해서 alias를 지정할 수 있다.
+	형식) <typeAlias alias="alias명" type="클래스의 풀네임"/>
+	-->
+	
+	<!-- 확인후 경로명이랑 alias 맘에 안들면 수정하구 알려주세염ㅎㅅㅎ-->
+	<typeAlias alias="alarmVO" type="kr.or.ddit.widu.vo.alarm.AlarmVO"/>
+	<typeAlias alias="attVO" type="kr.or.ddit.widu.vo.attendance.AttendanceVO"/>
+	<typeAlias alias="basketVO" type="kr.or.ddit.widu.vo.basket.BasketVO"/>
+	<typeAlias alias="blackVO" type="kr.or.ddit.widu.vo.blacklist.BlacklistVO"/>
+	<typeAlias alias="boardVO" type="kr.or.ddit.widu.vo.board.BoardVO"/>
+	<typeAlias alias="cateVO" type="kr.or.ddit.widu.vo.board.Board_categoryVO"/> <!-- 테이블명 수정 필요 -->
+	<typeAlias alias="commVO" type="kr.or.ddit.widu.vo.board.Comment_tbVO"/>
+	<typeAlias alias="chatVO" type="kr.or.ddit.widu.vo.chatting.ChattingVO"/>
+	<typeAlias alias="con_listVO" type="kr.or.ddit.widu.vo.consultant.Consultant_listVO"/>
+	<typeAlias alias="con_matVO" type="kr.or.ddit.widu.vo.consultant.Consultant_matchingVO"/>
+	<typeAlias alias="conVO" type="kr.or.ddit.widu.vo.consultant.ConsultantVO"/>
+	<typeAlias alias="home_boardVO" type="kr.or.ddit.widu.vo.homepage.Homepage_boardVO"/>
+	<typeAlias alias="home_diaryVO" type="kr.or.ddit.widu.vo.homepage.Homepage_diaryVO"/>
+	<typeAlias alias="home_gbookVO" type="kr.or.ddit.widu.vo.homepage.Homepage_guest_bookVO"/>
+	<typeAlias alias="home_musicVO" type="kr.or.ddit.widu.vo.homepage.Homepage_musicVO"/>
+	<typeAlias alias="home_photoVO" type="kr.or.ddit.widu.vo.homepage.Homepage_photoVO"/>
+	<typeAlias alias="home_rankVO" type="kr.or.ddit.widu.vo.homepage.Homepage_rankVO"/>
+	<typeAlias alias="homeVO" type="kr.or.ddit.widu.vo.homepage.HomepageVO"/>
+	<typeAlias alias="buyVO" type="kr.or.ddit.widu.vo.member.Buy_listVO"/>
+	<typeAlias alias="giftVO" type="kr.or.ddit.widu.vo.member.Gift_boxVO"/>
+	<typeAlias alias="hateVO" type="kr.or.ddit.widu.vo.member.Hate_tableVO"/>
+	<typeAlias alias="item_bVO" type="kr.or.ddit.widu.vo.member.Item_boxVO"/>
+	<typeAlias alias="keywordVO" type="kr.or.ddit.widu.vo.member.Item_boxVO"/>
+	<typeAlias alias="likeVO" type="kr.or.ddit.widu.vo.member.Like_TableVO"/>
+	<typeAlias alias="matchingVO" type="kr.or.ddit.widu.vo.member.MatchingVO"/>
+	<typeAlias alias="memVO" type="kr.or.ddit.widu.vo.member.MemberVO"/>
+	<typeAlias alias="pro_viewVO" type="kr.or.ddit.widu.vo.member.Profile_ViewVO"/>
+	<typeAlias alias="rubyVO" type="kr.or.ddit.widu.vo.member.RubbyVO"/> <!-- 테이블명 수정할 예정 -->
+	<typeAlias alias="q_boardVO" type="kr.or.ddit.widu.vo.question.Question_BoardVO"/>
+	<typeAlias alias="r_boardVO" type="kr.or.ddit.widu.vo.report.Report_BoardVO"/>
+	<typeAlias alias="shop_itemVO" type="kr.or.ddit.widu.vo.shop.Shop_ItemVO"/>
+	<typeAlias alias="shop_rubbyVO" type="kr.or.ddit.widu.vo.shop.Shop_RubbyVO"/> <!-- 테이블명 수정할 예정 -->
+	
+	
+	
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${driver}" />
+			<property name="JDBC.ConnectionURL" value="${url}" />
+			<property name="JDBC.Username" value="${username}" />
+			<property name="JDBC.Password" value="${password}" />
+		</dataSource>
+	</transactionManager>
+	
+	<!-- 
+	실제 처리할 SQL문은 xml문서로 따로 만든 후
+	그 xml문서와 아래와 같이 연결하여 사용한다.
+	형식) <sqlMap resource="경로명/파일명.xml"/> 
+	-->
+	
+	
+	<!-- xml파일 생성 후 추가 해주세용~~~~ㅎㅅㅎ -->
+	<sqlMap resource="kr/or/ddit/widu/xml/login/Login.xml"/>
+	<sqlMap resource="kr/or/ddit/widu/xml/join/Join.xml"/>
+	<sqlMap resource="kr/or/ddit/widu/xml/board/board.xml"/>
+	<sqlMap resource="kr/or/ddit/widu/xml/shop/shop.xml"/>
+	<sqlMap resource="kr/or/ddit/widu/xml/board/board_category.xml"/>
+	<sqlMap resource="kr/or/ddit/widu/xml/profile/profile.xml"/>
+
+	
+</sqlMapConfig>
+
+
+
+
+
+

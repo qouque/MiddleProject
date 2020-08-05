@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:controller="kr.or.ddit.widu.view.profile.ItemboxController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="112.0" layoutY="26.0" text="아이템 보관함">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutY="84.0" prefHeight="528.0" prefWidth="446.0">
+         <content>
+            <VBox fx:id="itemVbox" prefHeight="523.0" prefWidth="441.0" />
+         </content>
+      </ScrollPane>
+      <ImageView onMouseClicked="#closedBtnClicked" fx:id="closedBtn" fitHeight="42.0" fitWidth="38.0" layoutX="394.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../img/main/cancel.PNG" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

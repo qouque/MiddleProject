@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="board">
+
+<select id="selectAllBoard" resultClass="boardVO">
+
+	select * from board order by board_date desc
+
+</select>
+
+<select id="selectTitleBoard" resultClass="boardVO" parameterClass="String">
+	
+	select * from board where board_title like '%' || #board_title# || '%'
+	
+</select>
+
+<insert id="insertBoard" parameterClass="boardVO">
+
+	insert into board (board_id, board_title, board_writer, board_content,CATEGORY_ID)
+	values (board_seq.nextval, #board_title#, #board_writer#, #board_content#, #category_id#)
+
+</insert>
+
+<select id="selectOderByBoard" resultClass="boardVO" parameterClass="int">
+
+select * from  board where category_id = #data# order by board_date desc
+
+</select>
+
+<select id="selectBoardId" parameterClass="int" resultClass="boardVO">
+
+	select * from board where board_id = #board_id#
+
+</select>
+
+<select id="selectWriter" resultClass="boardVO" parameterClass="String">
+
+	select * from board where board_writer like '%' || #board_writer# || '%' order by board_date desc
+
+</select>
+
+<select id="selectMyBoard" resultClass="boardVO" parameterClass="String">
+
+	select * from board where board_writer = #mem_id#
+
+</select>
+
+
+<update id="updateBoard" parameterClass="boardVO">
+	update board
+	set  board_title = #board_title# 
+		, board_content	= #board_content#
+	where board_id = #board_id# 
+
+</update>
+
+<delete id="deleteBoard" parameterClass="int">
+	delete from board where board_id = #board_id#
+</delete>
+
+<select id="selectMyBoardBycate" resultClass="boardVO" parameterClass="boardVO">
+
+	select * from board where board_writer = #board_writer# and category_id = #category_id#
+
+</select>
+
+</sqlMap>			

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="join">
+
+	<insert id="insertMember" parameterClass="memVO">
+	
+		insert into member(mem_id,
+						   mem_pw,
+						   mem_nick,
+						   mem_name,
+						   mem_gender,
+						   mem_birth,
+						   mem_location,
+						   mem_job,
+						   mem_drink,
+						   mem_smoke,
+						   mem_height,
+						   mem_weight,
+						   mem_religion,
+						   mem_hp,
+						   mem_email,
+						   mem_picture) values(#mem_id#,
+								               #mem_pw#,
+								               #mem_nick#,
+								               #mem_name#,
+								               #mem_gender#,
+								               #mem_birth#,
+								               #mem_location#,
+								               #mem_job#,
+								               #mem_drink#,
+								               #mem_smoke#,
+								               #mem_height#,
+								               #mem_weight#,
+								               #mem_religion#,
+								               #mem_hp#,
+								               #mem_email#,
+								               #mem_picture#)
+	
+	</insert>	
+	
+</sqlMap>			

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="shop">
+	<typeAlias alias="shopItemVO" type="kr.or.ddit.widu.vo.shop.Shop_ItemVO"/>
+	<typeAlias alias="ShopRubbyVO" type="kr.or.ddit.widu.vo.shop.Shop_RubbyVO"/>
+	
+	<select id="selectAllItems" parameterClass="map" resultClass="shopItemVO">
+		SELECT * 
+		FROM SHOP_ITEM
+		<dynamic>
+			<isNotEmpty prepend="WHERE" property="search_keyword">
+				<isEqual property="search_keycode" compareValue="이름">
+					SHOP_NAME LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="가격">
+					SHOP_PRICE LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="insertItem" parameterClass="shopItemVO">
+		INSERT INTO SHOP_ITEM (SHOP_ID,
+                       SHOP_NAME,
+                       SHOP_DETAIL,
+                       SHOP_PRICE,
+                       SHOP_PICTURE) 
+		VALUES (SHOP_ITEM_SEQ.nextval,
+		        #shop_name#,
+		        #shop_detail#,
+		        #shop_price#,
+		        #shop_picture#) 
+	</insert>
+	
+	<update id="modifyItem" parameterClass="shopItemVO">
+		UPDATE SHOP_ITEM SET SHOP_NAME = #shop_name#,
+		                     SHOP_DETAIL = #shop_detail#,
+		                     SHOP_PRICE = #shop_price#
+		WHERE SHOP_ID = #shop_id#
+	</update>
+	
+	<delete id="deleteItem" parameterClass="map">
+		DELETE SHOP_ITEM WHERE SHOP_ID = #shop_id#
+	</delete>
+	
+	<select id="rubyselectallitems" resultClass="ShopRubbyVO">
+		SELECT * 
+		FROM SHOP_RUBBY
+		<dynamic>
+			<isNotEmpty prepend="WHERE" property="search_keyword">
+				<isEqual property="search_keycode" compareValue="이름">
+					RUBBY_NAME LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="가격">
+					RUBBY_PRICE LIKE '%'||#search_keyword#||'%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<insert id="rubyinsertItem" parameterClass="ShopRubbyVO">
+	
+	insert into SHOP_RUBBY (RUBBY_ID,
+                        RUBBY_NAME,
+                        RUBBY_PRICE,
+                        RUBBY_COUNT)
+		values (SHOPE_RUBBY_SEQ.nextval,
+        		#rubby_name#,
+        		#rubby_price#,
+       			#rubby_count#)
+	
+	</insert>
+	<update id="rubymodifyItem" parameterClass="ShopRubbyVO">
+	update SHOP_RUBBY set RUBBY_NAME = #rubby_name#,
+	RUBBY_PRICE = #rubby_price#,
+	RUBBY_COUNT = #rubby_count# 
+	WHERE RUBBY_ID = #rubby_id#
+	</update>
+	
+	<delete id="rubydeleteItem" parameterClass="map">
+		DELETE SHOP_RUBBY WHERE RUBBY_ID = #rubby_id#
+	</delete>
+	
+	<select id="newItemList" resultClass="shopItemVO">
+		SELECT *
+		FROM SHOP_ITEM
+		ORDER BY SHOP_REGDATE DESC
+	</select>
+	
+	<select id="popularItemList" resultClass="shopItemVO">
+		SELECT SHOP_ITEM.SHOP_ID, COUNT(BUY_LIST.SHOP_ID) cnt
+		FROM BUY_LIST
+		         JOIN SHOP_ITEM on SHOP_ITEM.SHOP_ID = BUY_LIST.SHOP_ID
+		GROUP BY BUY_LIST.SHOP_ID
+		ORDER BY cnt DESC
+	</select>
+	
+	<select id="itemInfo" parameterClass="map" resultClass="shopItemVO">
+		SELECT *
+		FROM SHOP_ITEM
+		WHERE SHOP_ID = #shop_id#
+	</select>
+</sqlMap>
